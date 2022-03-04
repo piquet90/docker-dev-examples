@@ -11,18 +11,18 @@ const client = new Client({
     password: 'example',
     port: 5432
 })
-client.connect()
-
-client.query('SELECT NOW()', (err, res) => {
-  console.log(err, res)
-  client.end()
-})
 
 
 app.get('/', (req, res) => {
 
+    client.connect()
 
-    res.send('Hello World!')
+    client.query('SELECT NOW()', (err, res) => {
+        console.log(err, res)
+        res.send(res)
+        client.end()
+    })
+
 })
 
 app.listen(3000, () => {
